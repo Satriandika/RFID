@@ -82,7 +82,7 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" name="password" placeholder="Masukan password">
                       </div>
-                      <button type="submit" name="Submit" value="Submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                      <button type="submit" name="submit" value="Submit" class="btn btn-gradient-primary mr-2">Submit</button>
                       <button onclick="cancelSubmit()" class="btn btn-light">Cancel</button>
                     </form>
                   </div>

@@ -4,7 +4,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 require_once("koneksidb.php");
 
-$data = query("SELECT * FROM tb_monitoring")[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +12,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>RFID Data</title>
+  <title>Data Tol</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
@@ -47,41 +46,35 @@ $data = query("SELECT * FROM tb_monitoring")[0];
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-chart-bar"></i>
-              </span> RFID Data
+              </span> Data Tol
             </h3>
           </div>
           <div class="row">
             <div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">RFID DATA</h4>
+                  <h4 class="card-title">Data Tol</h4>
                   <!-- <p class="card-description"> Add class <code>.table-{color}</code> -->
                   </p>
                   <table class="table table-bordered">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>RFID</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Telepon</th>
-                        <th>Saldo</th>
+                        <th>Id tol</th>
+                        <th>Harga</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-
-                      $datatampil = mysqli_query($koneksi, "SELECT *from tb_daftarrfid ORDER BY id DESC");
+                      $query = "SELECT * from tb_tol";
+                      $datatampil = mysqli_query($koneksi, $query);
                       $no = 1;
                       if (is_array($datatampil) || is_object($datatampil)) {
                         foreach ($datatampil as $row) {
                           echo "<tr class= bg-white >
                                   <td>" . $no . "</td>
-                                  <td>" . $row['rfid'] . "</td>
-                                  <td>" . $row['nama'] . "</td>
-                                  <td>" . $row['alamat'] . "</td>
-                                  <td>" . $row['telepon'] . "</td>
-                                  <td>" . $row['saldo'] . "</td>
+                                  <td>" . $row['idtol'] . "</td>
+                                  <td>" . $row['harga'] . "</td>
                               </tr>";
                           $no++;
                         }

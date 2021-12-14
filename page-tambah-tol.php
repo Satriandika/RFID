@@ -75,8 +75,8 @@ require "koneksidb.php";
                   <p class="card-description">Masukkan id tol dan harga</p>
                   <form action="action-tambah-tol.php" method="POST" class="forms-sample">
                     <div class="form-group">
-                      <label for="exampleInputUsername1">Id Tol</label>
-                      <input type="text" class="form-control" name="idtol" id="rfid" placeholder="Masukan idtol">
+                      <label for="exampleInputUsername1">Id tol</label>
+                      <input type="text" class="form-control" name="idtol" id="rfid" placeholder="Masukan id tol">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Harga</label>

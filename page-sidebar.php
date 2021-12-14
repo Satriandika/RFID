@@ -53,6 +53,12 @@ $username = $_SESSION["username"];
                 <i class="mdi mdi-currency-usd menu-icon"></i>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="page-data-tol.php">
+                <span class="menu-title">Data Tol</span>
+                <i class="mdi mdi-road menu-icon"></i>
+            </a>
+        </li>
         <li class="nav-item sidebar-actions">
             <div class="border-bottom">
                 <h6 class="font-weight-normal mb-3">Setting</h6>
