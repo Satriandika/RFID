@@ -31,9 +31,9 @@ $data = query("SELECT * FROM tb_monitoring")[0];
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    <?php
-    require_once("page-navbar.php");
-    ?>
+      <?php
+        require("page-header.php");
+      ?>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_sidebar.html -->
@@ -131,6 +131,11 @@ $data = query("SELECT * FROM tb_monitoring")[0];
       <script src="assets/vendor/datatables/js/buttons.bootstrap4.min.js"></script>
       <script src="assets/vendor/datatables/js/data-table.js"></script> -->
       <!-- End custom js for this page -->
+
+      <!-- JS For Realtime -->
+      <script type="text/javascript" src="time/datetime.js"></script>
+      <script type="text/javascript">window.onload = date_time('time/date_time');</script>
+      <!-- END JS For Realtime -->
 </body>
 
 </html>

@@ -39,9 +39,9 @@
 
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
-        <?php
-            require_once("page-navbar.php");
-        ?>
+            <?php
+                require("page-header.php");
+            ?>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_sidebar.html -->
