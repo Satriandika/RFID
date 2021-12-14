@@ -13,7 +13,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Log Data</title>
+  <title>RFID Data</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
@@ -90,40 +90,34 @@ $data = query("SELECT * FROM tb_monitoring")[0];
             <div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Transactions Data Log</h4>
+                  <h4 class="card-title">RFID DATA</h4>
                   <!-- <p class="card-description"> Add class <code>.table-{color}</code> -->
                   </p>
                   <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
+                        <th>Id</th>
                         <th>RFID</th>
                         <th>Nama</th>
-                        <th>Saldo Awal</th>
-                        <th>Harga</th>
-                        <th>Saldo Akhir</th>
-                        <th>Nama Tol</th>
-                        <th>Status</th>
+                        <th>Alamat</th>
+                        <th>Telepon</th>
+                        <th>Saldo</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
 
-                      $datatampil = mysqli_query($koneksi, "SELECT *, a.rfid as rfid from tb_simpan a left join tb_daftarrfid b on a.rfid = b.rfid ORDER BY no DESC limit 5");
+                      $datatampil = mysqli_query($koneksi, "SELECT *from tb_daftarrfid ORDER BY id DESC");
                       $no = 1;
                       if (is_array($datatampil) || is_object($datatampil)) {
                         foreach ($datatampil as $row) {
                           echo "<tr class= bg-white >
-                                  <td>$no</td>
-                                  <td>" . $row['tanggal'] . "</td>
+                                  <td>" . $row['id'] . "</td>
                                   <td>" . $row['rfid'] . "</td>
                                   <td>" . $row['nama'] . "</td>
-                                  <td>" . $row['saldoawal'] . "</td>
-                                  <td>" . $row['harga'] . "</td>
-                                  <td>" . $row['saldoakhir'] . "</td>
-                                  <td>" . $row['tol'] . "</td>
-                                  <td>" . $row['status_transaksi'] . "</td>
+                                  <td>" . $row['alamat'] . "</td>
+                                  <td>" . $row['telepon'] . "</td>
+                                  <td>" . $row['saldo'] . "</td>
                               </tr>";
                           $no++;
                         }
