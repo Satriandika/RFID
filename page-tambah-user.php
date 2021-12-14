@@ -78,11 +78,11 @@ $data    = query("SELECT * FROM tb_monitoring")[0];
                   <form action="action-tambah-user.php" method="POST" name="form-tambah-user" class="forms-sample">
                     <div class="form-group">
                       <label for="username">Username</label>
-                      <input type="text" class="form-control" name="username" placeholder="Masukan username">
+                      <input type="text" class="form-control" name="username" placeholder="Masukkan username">
                     </div>
                     <div class="form-group">
                       <label for="password">Password</label>
-                      <input type="password" class="form-control" name="password" placeholder="Masukan password">
+                      <input type="password" class="form-control" name="password" placeholder="Masukkan password">
                     </div>
                     <button type="submit" name="submit" value="Submit" class="btn btn-gradient-primary mr-2">Submit</button>
                     <button onclick="cancelSubmit()" class="btn btn-light">Cancel</button>
