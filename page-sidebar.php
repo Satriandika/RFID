@@ -15,13 +15,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link border-bottom" href="index.html">
+            <a class="nav-link border-bottom" href="page-dashboard.php">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="log-data.html">
+            <a class="nav-link" href="page-log-data.php">
                 <span class="menu-title">Log Transaksi</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
