@@ -48,7 +48,7 @@ $username = $_SESSION["username"];
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="topup.html">
+            <a class="nav-link" href="page-topup.php">
                 <span class="menu-title">Menu Top Up</span>
                 <i class="mdi mdi-currency-usd menu-icon"></i>
             </a>
