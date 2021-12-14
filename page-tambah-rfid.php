@@ -8,6 +8,13 @@ if (session_status() == PHP_SESSION_NONE) {
 $data = query("SELECT * FROM tb_monitoring")[0];
 $rfid_monitor = $data["rfid"] ?? ""; 
 $rfid = $_GET["rfid"] ?? null;
+if($rfid) {
+    $res = queryfirst("SELECT * from tb_daftarrfid where rfid = '$rfid'");
+    if(count($res) > 0) {
+        echo "<script type='text/javascript'>alert('RFID sudah terdaftar');</script>";
+        $rfid = null;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
