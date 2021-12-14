@@ -1,0 +1,32 @@
+<?php 	
+
+    //Simpan dengan nama file koneksidb.php
+
+    $server       = ini_get("mysql.default_host"); //Kalau X sama dalam 1 
+    //$server       = "localhost";
+    $user         = "root"; // id18098050_user1	
+    $password     = "1123"; // T9wyFUjdMF)dnIO<
+    $database     = "rfid_project"; //Nama Database di phpMyAdmin //id18098050_rfidui
+
+    $koneksi      = mysqli_connect($server, $user, $password, $database);
+
+    function query($query) {
+        global $koneksi;
+        $result = mysqli_query($koneksi, $query);
+        $box = [];
+        while( $sql = mysqli_fetch_assoc($result) ){
+            $box[] = $sql;
+        }
+        return $box;
+    }
+
+    function queryfirst($query) {
+        $res = query($query);
+        if(!$res || count($res) <= 0) {
+            return null;
+        } else {
+            return $res[0];
+        }
+    }
+
+ ?>
