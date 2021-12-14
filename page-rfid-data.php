@@ -96,7 +96,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
                   <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th>Id</th>
+                        <th>No</th>
                         <th>RFID</th>
                         <th>Nama</th>
                         <th>Alamat</th>
@@ -112,7 +112,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
                       if (is_array($datatampil) || is_object($datatampil)) {
                         foreach ($datatampil as $row) {
                           echo "<tr class= bg-white >
-                                  <td>" . $row['id'] . "</td>
+                                  <td>".$no."</td>
                                   <td>" . $row['rfid'] . "</td>
                                   <td>" . $row['nama'] . "</td>
                                   <td>" . $row['alamat'] . "</td>

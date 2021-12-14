@@ -1,8 +1,9 @@
 <?php
+
+require_once("koneksidb.php");
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require_once("koneksidb.php");
 
 $data = query("SELECT * FROM tb_monitoring")[0];
 $rfid_monitor = $data["rfid"] ?? ""; 
@@ -31,6 +32,19 @@ $rfid = $_GET["rfid"] ?? null;
 </head>
 
 <body>
+<?php
+    if ($_SESSION['status'] != "login") {
+        header("location:index.php?pesan=belum_login");
+    }
+
+    if (isset($_GET['pesan'])) {
+        if ($_GET['pesan'] == "berhasil") {
+            echo "<script type='text/javascript'>alert('Berhasil menambahkan data!');</script>";
+        } else {
+            echo "<script type='text/javascript'>alert('Gagal menambahkan data');</script>";
+        }
+    }
+    ?>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -93,7 +107,7 @@ $rfid = $_GET["rfid"] ?? null;
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">RFID Form</h4>
-                                    <form class="forms-sample" action="action-input-data.php" method="POST" name="form-input-data">
+                                    <form class="forms-sample" action="action-tambah-rfid.php" method="POST" name="form-input-data">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">RFID</label>
                                             <input type="text" class="form-control"  value="<?=$rfid??""?>"name="rfid" id="exampleInputUsername1" placeholder="Masukkan RFID">
