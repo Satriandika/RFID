@@ -39,6 +39,12 @@
               </div>
             </form>
           </div>
+		  <!-- Waktu otomatis -->
+		  <ul class="navbar-nav navbar-nav-right">
+			<div style="float: right;margin-right: 10px;" class="font-weight-bold">
+				<span id="time/date_time"></span>
+			</div>
+			<!-- END Waktu otomatis -->
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -276,5 +282,7 @@
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/todolist.js"></script>
     <!-- End custom js for this page -->
+	<script type="text/javascript" src="time/datetime.js"></script>
+	<script type="text/javascript">window.onload = date_time('time/date_time');</script>
   </body>
 </html>
