@@ -37,13 +37,13 @@ $username = $_SESSION["username"];
         </li>
         <li class="nav-item">
             <a class="nav-link" href="page-tambah-rfid.php">
-                <span class="menu-title">Tambah RFID</span>
+                <span class="menu-title">Tambah Pengguna RFID</span>
                 <i class="mdi mdi-account-multiple-plus menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="page-rfid-data.php">
-                <span class="menu-title">Data Pengguna</span>
+                <span class="menu-title">Data Pengguna RFID</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
         </li>
@@ -54,15 +54,22 @@ $username = $_SESSION["username"];
             </a>
         </li>
         <li class="nav-item sidebar-actions">
-            <span class="nav-link">
-                <div class="border-bottom">
-                    <h6 class="font-weight-normal mb-3">Setting</h6>
-                </div>
-                <a class="nav-link" href="pages/tables/basic-table.html">
-                    <span class="menu-title">Tambah User</span>
-                    <i class="mdi mdi-account-plus menu-icon item float-sm-right"></i>
-                </a>
-                <a class="btn btn-block btn-lg btn-gradient-primary mt-4" href="action-logout.php">Logout</a>
+            <div class="border-bottom">
+                <h6 class="font-weight-normal mb-3">Setting</h6>
+            </div>
+            <a class="nav-link" href="page-tambah-user.php">
+                <span class="menu-title">Tambah User</span>
+                <i class="mdi mdi-account-plus menu-icon item float-sm-right"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="page-tambah-tol.php">
+                <span class="menu-title">Tambah Tol</span>
+                <i class="mdi mdi-road menu-icon item float-sm-right"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-block btn-lg btn-gradient-primary mt-4" href="action-logout.php">Logout</a>
             </span>
         </li>
     </ul>

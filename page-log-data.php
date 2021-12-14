@@ -17,6 +17,11 @@ $data = query("SELECT * FROM tb_monitoring")[0];
   <!-- plugins:css -->
   <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+
+  <link rel="stylesheet" type="text/css" href="assets/vendors/datatables/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" type="text/css" href="assets/vendors/datatables/css/buttons.bootstrap4.css">
+  <link rel="stylesheet" type="text/css" href="assets/vendors/datatables/css/select.bootstrap4.css">
+  <link rel="stylesheet" type="text/css" href="assets/vendors/datatables/css/fixedHeader.bootstrap4.css">
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -31,45 +36,9 @@ $data = query("SELECT * FROM tb_monitoring")[0];
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="page-dashboard.php"><img src="assets/images/delameta2.svg" alt="logo" /></a>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-stretch">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-          <span class="mdi mdi-menu"></span>
-        </button>
-        <div class="search-field d-none d-md-block">
-          <form class="d-flex align-items-center h-100" action="#">
-            <div class="input-group">
-              <div class="input-group-prepend bg-transparent">
-                <i class="input-group-text border-0 mdi mdi-magnify"></i>
-              </div>
-              <input type="text" class="form-control bg-transparent border-0" placeholder="Search">
-            </div>
-          </form>
-        </div>
-        <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <div class="nav-profile-img">
-                <img src="assets/images/faces/admin.png" alt="image">
-                <span class="availability-status online"></span>
-              </div>
-              <div class="nav-profile-text">
-                <p class="mb-1 text-black">Admin</p>
-              </div>
-            </a>
-            <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
-            </div>
-          </li>
-      </div>
-    </nav>
+    <?php
+    require_once("page-navbar.php");
+    ?>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_sidebar.html -->
@@ -93,7 +62,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
                   <h4 class="card-title">Transactions Data Log</h4>
                   <!-- <p class="card-description"> Add class <code>.table-{color}</code> -->
                   </p>
-                  <table class="table table-bordered">
+                  <table id=example class="table table-bordered table-striped second">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -110,7 +79,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
                     <tbody>
                       <?php
 
-                      $datatampil = mysqli_query($koneksi, "SELECT *, a.rfid as rfid from tb_simpan a left join tb_daftarrfid b on a.rfid = b.rfid ORDER BY no DESC limit 5");
+                      $datatampil = mysqli_query($koneksi, "SELECT *, a.rfid as rfid from tb_simpan a left join tb_daftarrfid b on a.rfid = b.rfid ORDER BY no");
                       $no = 1;
                       if (is_array($datatampil) || is_object($datatampil)) {
                         foreach ($datatampil as $row) {
@@ -166,12 +135,19 @@ $data = query("SELECT * FROM tb_monitoring")[0];
       <script src="assets/js/dashboard.js"></script>
       <script src="assets/js/todolist.js"></script>
       <!-- data tables -->
-      <!-- <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-      <script src="assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
+      <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-      <script src="assets/vendor/datatables/js/buttons.bootstrap4.min.js"></script>
-      <script src="assets/vendor/datatables/js/data-table.js"></script> -->
+      <script src="assets/vendors/datatables/js/dataTables.bootstrap4.min.js"></script>
+      <script src="assets/vendors/datatables/js/buttons.bootstrap4.min.js"></script>
+      <script src="assets/vendors/datatables/js/data-table.js"></script>
+
+
+
+      <!-- <script>
+        $(document).ready(function() {
+          $('.table').DataTable();
+        });
+      </script> -->
       <!-- End custom js for this page -->
 </body>
 

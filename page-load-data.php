@@ -3,8 +3,9 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once("koneksidb.php");
-$data = query("SELECT * FROM tb_monitoring")[0];
-
+$data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rfid FROM tb_monitoring a 
+	left join tb_daftarrfid b on a.rfid = b.rfid
+	left join tb_tol c on a.idtol = c.idtol");
 ?>
 
 <!DOCTYPE html>
@@ -17,33 +18,63 @@ $data = query("SELECT * FROM tb_monitoring")[0];
 <body>
 
     <div class="row">
-        <div class="col-md-4 stretch-card grid-margin">
+        <div class="col-md-3 stretch-card grid-margin">
             <div class="card bg-gradient-danger card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Tanggal<i class="mdi mdi-clock mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-1">Tanggal<i class="mdi mdi-clock mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5"><?= $data["tanggal"]; ?></h2>
+                    <h3 class="mb-1"><?= $data["tanggal"]; ?></h3>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 stretch-card grid-margin">
+        <div class="col-md-3 stretch-card grid-margin">
             <div class="card bg-gradient-info card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">RFID<i class="mdi mdi-account-card-details mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-1">RFID<i class="mdi mdi-account-card-details mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5"><?= $data["rfid"]; ?></h2>
+                    <h3 class="mb-1"><?= $data["rfid"]; ?></h3>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 stretch-card grid-margin">
+        <div class="col-md-3 stretch-card grid-margin">
             <div class="card bg-gradient-success card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Pintu Tol<i class="mdi mdi-highway mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-1">Pintu Tol<i class="mdi mdi-highway mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5"><?= $data["idtol"]; ?></h2>
+                    <h3 class="mb-1"><?= $data["idtol"]; ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 stretch-card grid-margin">
+            <div class="card bg-gradient-dark card-img-holder text-white">
+                <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-1">Saldo<i class="mdi mdi-highway mdi-24px float-right"></i>
+                    </h4>
+                    <h3 class="mb-1"><?= $data["saldo"]; ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 stretch-card grid-margin">
+            <div class="card bg-gradient-primary card-img-holder text-white">
+                <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-1">Harga<i class="mdi mdi-highway mdi-24px float-right"></i>
+                    </h4>
+                    <h3 class="mb-1"><?= $data["harga"]; ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 stretch-card grid-margin">
+            <div class="card bg-gradient-secondary card-img-holder text-white">
+                <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-1">Status<i class="mdi mdi-highway mdi-24px float-right"></i>
+                    </h4>
+                    <h3 class="mb-1"><?= $data["status_transaksi"]; ?></h3>
                 </div>
             </div>
         </div>

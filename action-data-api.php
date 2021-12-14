@@ -1,7 +1,7 @@
 <?php
 
 require "koneksidb.php";
-require "error-map.php";
+require "const-error-map.php";
 
 // get api
 $rfid		= $_GET["rfid"];
@@ -11,7 +11,7 @@ date_default_timezone_set('Asia/Jakarta');
 $tgl = date("Y-m-d G:i:s");
 
 // inisiasi
-$status_transaksi = "1";
+$status_transaksi = BERHASIL;
 $saldoakhir = 0;
 $harga = 0;
 
@@ -19,7 +19,8 @@ $harga = 0;
 // get harga
 $sqlstring = "SELECT * FROM tb_tol where idtol LIKE '$idtol'";
 $tbtol = queryfirst($sqlstring);
-if($tbtol["harga"]) {
+
+if($tbtol && $tbtol["harga"]) {
 	$harga = $tbtol["harga"];
 } else {
 	$status_transaksi = TOL_NOT_FOUND;
@@ -49,7 +50,7 @@ $sql      = "UPDATE tb_monitoring SET tanggal	= '$tgl', rfid	= '$rfid', idtol = 
 $koneksi->query($sql);
 
 //INSERT DATA REALTIME PADA TABEL tb_save	
-$sqlsave = "INSERT INTO rfidui.tb_simpan (tanggal, rfid, saldoawal, saldoakhir, harga, tol, status_transaksi) 
+$sqlsave = "INSERT INTO tb_simpan (tanggal, rfid, saldoawal, saldoakhir, harga, tol, status_transaksi) 
 VALUES (current_timestamp(), '$rfid', $saldo, $saldoakhir, $harga, '$idtol', '$status_transaksi');";
 $koneksi->query($sqlsave);
 //update saldo daftarrfid
