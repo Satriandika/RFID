@@ -48,7 +48,7 @@ require "koneksidb.php";
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <?php
-    require_once("page-navbar.php");
+    require_once("page-header.php");
     ?>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
