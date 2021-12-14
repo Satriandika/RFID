@@ -58,7 +58,7 @@ $username = $_SESSION["username"];
                 <div class="border-bottom">
                     <h6 class="font-weight-normal mb-3">Setting</h6>
                 </div>
-                <a class="nav-link" href="pages/tables/basic-table.html">
+                <a class="nav-link" href="page-tambah-user.php">
                     <span class="menu-title">Tambah User</span>
                     <i class="mdi mdi-account-plus menu-icon item float-sm-right"></i>
                 </a>
