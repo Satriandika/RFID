@@ -65,16 +65,16 @@ $data    = query("SELECT * FROM tb_monitoring")[0];
           <div class="page-header">
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                <i class="mdi mdi-currency-usd"></i>
-              </span> Menu Top Up
+                <i class="mdi mdi-account-plus"></i>
+              </span> Menu Tambah User
             </h3>
           </div>
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Top Up</h4>
-                  <p class="card-description">Masukkan RFID dan Nominal</p>
+                  <h4 class="card-title">Tambah User</h4>
+                  <p class="card-description">Masukkan Username dan Password</p>
                   <form action="action-tambah-user.php" method="POST" name="form-tambah-user" class="forms-sample">
                     <div class="form-group">
                       <label for="username">Username</label>
