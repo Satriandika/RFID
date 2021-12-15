@@ -10,7 +10,7 @@ $rfid_monitor = $data["rfid"] ?? "";
 $rfid = $_GET["rfid"] ?? null;
 if($rfid) {
     $res = queryfirst("SELECT * from tb_daftarrfid where rfid = '$rfid'");
-    if(count($res) > 0) {
+    if($res && count($res) > 0) {
         echo "<script type='text/javascript'>alert('RFID: $rfid sudah terdaftar');</script>";
         $rfid = null;
     }

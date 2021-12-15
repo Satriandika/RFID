@@ -10,13 +10,9 @@ $message		    = $_GET["message"];
 date_default_timezone_set('Asia/Jakarta');
 $tgl = date("Y-m-d G:i:s");
 
-if($status_gerbang && $message) {
-    $sql = "UPDATE tb_screen SET status_gerbang='$status_gerbang', message='$message'";
-    var_dump($sql);
-    $res = $koneksi->query($sql);
-}
+$sql = "UPDATE tb_screen SET status_gerbang='$status_gerbang', message='$message'";
+$res = $koneksi->query($sql) ? 1 : 0;
 
 
 //MENJADIKAN JSON DATA
-$result = json_encode(null);
-echo $result;
+echo $res;

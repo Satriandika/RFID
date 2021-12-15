@@ -11,16 +11,18 @@ byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xEC};
 EthernetClient client;
 
 int HTTP_PORT = 80;
-String HTTP_METHOD = "GET";
-char HOST_NAME[] = "192.168.1.41"; // change to your PC's IP address
-String PATH_NAME = "/rfidui/data-api.php";
+char HTTP_METHOD[] = "GET";
+char HOST_NAME[] = "192.168.1.128"; // change to your PC's IP address
+char data_path[] = "/RFID/action-data-api.php";
+char screen_path[] = "/RFID/action-screen-api.php";
+char endH[] = "\r\n\r\n";
 String getData;
 String uidString;
 Servo myservo;
 
 #define SS_PIN 9
 #define RST_PIN 8
-#define buzzer 7
+#define pinBuzzer 7
 int pinIR = 6;
 int pinServo = 3;
 int pinR = 2;
@@ -39,20 +41,20 @@ const char *status_transaksi;
 const char *nama_dibaca;
 
 void buzzeroke() {
-  digitalWrite(buzzer, HIGH);
+  digitalWrite(pinBuzzer, HIGH);
   delay(100);
-  digitalWrite(buzzer, LOW);
+  digitalWrite(pinBuzzer, LOW);
   delay(100);
-  digitalWrite(buzzer, HIGH);
+  digitalWrite(pinBuzzer, HIGH);
   delay(100);
-  digitalWrite(buzzer, LOW);
+  digitalWrite(pinBuzzer, LOW);
   delay(100);
 }
 
 void buzzergagal() {
-  digitalWrite(buzzer, HIGH);
+  digitalWrite(pinBuzzer, HIGH);
   delay(850);
-  digitalWrite(buzzer, LOW);
+  digitalWrite(pinBuzzer, LOW);
   delay(80);
 }
 
@@ -66,9 +68,9 @@ int isRising(int input) {
 }
 
 void setLampu(int r, int y, int g) {
-  analogWrite(r, pinR);
-  analogWrite(y, pinY);
-  analogWrite(g, pinG);
+  digitalWrite(pinR, r);
+  digitalWrite(pinY, y);
+  digitalWrite(pinG, g);
 }
 
 bool readRFID() {
@@ -88,23 +90,19 @@ bool readRFID() {
     uidString.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? "0" : ""));
     uidString.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
-  Serial.print("Message : ");
   uidString.toUpperCase();
   Serial.println(uidString);
-  digitalWrite(buzzer, HIGH);
+  digitalWrite(pinBuzzer, HIGH);
   delay(100);
-  digitalWrite(buzzer, LOW);
+  digitalWrite(pinBuzzer, LOW);
 
   return true;
 }
 
-void httpRequest() {
+void httpRequest(String path, String body) {
   // POST TO WEB
   client.connect(HOST_NAME, HTTP_PORT);
-  String payload = HTTP_METHOD + " " + PATH_NAME +
-                   "?rfid=" + String(uidString) + "&tol=" + tol +
-                   //"&sensor2=" + String(sensor2) +
-                   " HTTP/1.1";
+  String payload = String(HTTP_METHOD) + " " + path + body + " HTTP/1.1";
   Serial.println("payload=" + payload);
   client.println(payload);
   client.println("Host: " + String(HOST_NAME));
@@ -119,12 +117,18 @@ void httpRequest() {
       getData.trim();
     }
   }
-  Serial.println("response=" + getData);
+
+  Serial.println("size=" + String(getData.length()) + "response=" + getData);
+}
+
+void sendPayment(String rfid, String tol) {
+  String body = "?rfid=" + rfid + "&tol=" + tol;
+  httpRequest(data_path, body);
 
   // AMBIL DATA JSON
   const size_t capacity =
       JSON_OBJECT_SIZE(5) +
-      100; // cari dulu nilainya pakai Arduino Json 5 Asisten
+      110; // cari dulu nilainya pakai Arduino Json 5 Asisten
   DynamicJsonDocument doc(capacity);
   // StaticJsonDocument<192> doc;
   DeserializationError error = deserializeJson(doc, getData);
@@ -143,9 +147,14 @@ void httpRequest() {
   Serial.println("Nama = " + String(nama_dibaca));
 }
 
+void sendInfo(String status_gerbang, String message) {
+  String body = "?status_gerbang=" + status_gerbang + "&message=" + message;
+  httpRequest(screen_path, body);
+}
+
 void setup() {
   Serial.begin(115200);
-  pinMode(buzzer, OUTPUT);
+  pinMode(pinBuzzer, OUTPUT);
   pinMode(pinR, OUTPUT);
   pinMode(pinY, OUTPUT);
   pinMode(pinG, OUTPUT);
@@ -177,7 +186,7 @@ void setup() {
   client.connect(HOST_NAME, HTTP_PORT);
   Serial.println("Siap Digunakan!");
 
-  setLampu(255, 0, 0);
+  setLampu(HIGH, 0, 0);
   myservo.write(90);
 }
 
@@ -190,17 +199,17 @@ void loop() {
   }
 
   if (gateState == 0 && readRFID()) {
-    httpRequest();
+    sendPayment(uidString, tol);
     // LOGIKA
-    if (String(status_transaksi) != "Berhasil") {
+    if (String(status_transaksi) != "1") {
       buzzergagal();
-      if (String(status_transaksi) == "RFID tidak dikenal") {
+      if (String(status_transaksi) == "3") {
         Serial.println("RFID TIDAK DIKENAL");
 
-      } else if (String(status_transaksi) == "Tol tidak dikenal") {
+      } else if (String(status_transaksi) == "4") {
         Serial.println("TOL TIDAK TERDAFTAR");
 
-      } else if (String(status_transaksi) == "Saldo kurang") {
+      } else if (String(status_transaksi) == "5") {
         Serial.println("SALDO TIDAK CUKUP");
       } else {
         Serial.println("TRANSAKSI GAGAL");
@@ -210,17 +219,19 @@ void loop() {
       gateState = 1;
       myservo.write(0);
 
+      sendInfo("Dibuka", "1");
       Serial.println("Kartu Terdaftar!");
-      Serial.println("Silahkan Masuk");
+      Serial.println("Silakan Masuk");
 
-      setLampu(0, 255, 0);
+      setLampu(0, HIGH, 0);
       delay(100);
-      setLampu(0, 0, 255);
+      setLampu(0, 0, HIGH);
     }
-  } else if(gateState == 1 && rising == 1) {
+  } else if (gateState == 1 && rising == 1) {
     myservo.write(90);
-    setLampu(255,0,0);
-    Serial.println("Tempelkan kartu");
+    setLampu(HIGH, 0, 0);
+    sendInfo("Ditutup", "0");
+    Serial.println("Tempelkan kartu!");
     gateState = 0;
   }
 

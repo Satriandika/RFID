@@ -30,7 +30,7 @@ if($tbtol && $tbtol["harga"]) {
 $saldo = queryfirst("select * from tb_daftarrfid where rfid like '$rfid'")['saldo'] ?? 0;
 
 // calculate saldo
-if ($saldo) {
+if ($saldo != null) {
 	$saldoakhir = $saldo - $harga;
 	if ($saldoakhir < 0) {
 		$status_transaksi = SALDO_KURANG;
