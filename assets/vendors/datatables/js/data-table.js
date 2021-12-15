@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
                         { "visible": false, "targets": groupColumn }
                     ],
                     "order": [
-                        [groupColumn, 'asc']
+                        [groupColumn, 'desc']
                     ],
                     "displayLength": 25,
                     "drawCallback": function(settings) {

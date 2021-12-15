@@ -42,7 +42,7 @@ $data    = query("SELECT * FROM tb_monitoring")[0];
       echo "<script type='text/javascript'>alert('Berhasil menambahkan data!');</script>";
     }
     if ($_GET['pesan'] == "gagal") {
-      echo "<script type='text/javascript'>alert('Data Tidak Terdaftar!');</script>";
+      echo "<script type='text/javascript'>alert('Gagal menambahkan data');</script>";
     }
   }
   ?>
@@ -85,7 +85,7 @@ $data    = query("SELECT * FROM tb_monitoring")[0];
                       <input type="password" class="form-control" name="password" placeholder="Masukkan password">
                     </div>
                     <button type="submit" name="submit" value="Submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                    <button onclick="cancelSubmit()" class="btn btn-light">Cancel</button>
+                    <a onclick="cancelSubmit()" class="btn btn-light">Cancel</button>
                   </form>
                 </div>
               </div>

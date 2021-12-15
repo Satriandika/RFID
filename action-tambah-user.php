@@ -5,7 +5,7 @@
     $username            = $_POST['username'];
     $data = query("SELECT * FROM tb_user WHERE username='$username'")[0];
 
-    if ($data == 0 ) {
+    if ($data == 0 && $username ) {
         if ($_POST['submit'] == "Submit") {
             $username          = $_POST['username'];
             $password           = $_POST['password'];
