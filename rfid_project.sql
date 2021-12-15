@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 09:15 AM
+-- Generation Time: Dec 15, 2021 at 09:17 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -355,21 +355,20 @@ INSERT INTO `tb_simpan` (`no`, `tanggal`, `rfid`, `saldoawal`, `saldoakhir`, `ha
 
 CREATE TABLE `tb_tol` (
   `idtol` varchar(100) NOT NULL DEFAULT 'defaulttol',
-  `harga` bigint(255) DEFAULT NULL,
-  `namatol` varchar(100) DEFAULT NULL
+  `harga` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_tol`
 --
 
-INSERT INTO `tb_tol` (`idtol`, `harga`, `namatol`) VALUES
-('kebun jeruk', 10000, 'kebun jeruk'),
-('bca', 10000, 'bca'),
-('srengseng', 75000, 'srengseng'),
-('meruya', 123123, NULL),
-('meruya', 1123123, NULL),
-('meruya', 123123, NULL);
+INSERT INTO `tb_tol` (`idtol`, `harga`) VALUES
+('kebun jeruk', 10000),
+('bca', 10000),
+('srengseng', 75000),
+('meruya', 123123),
+('meruya', 1123123),
+('meruya', 123123);
 
 -- --------------------------------------------------------
 
