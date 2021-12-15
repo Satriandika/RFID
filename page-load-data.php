@@ -52,7 +52,7 @@ $data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rf
             <div class="card bg-gradient-dark card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-1">Saldo<i class="mdi mdi-highway mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-1">Saldo<i class="mdi mdi-currency-usd mdi-24px float-right"></i>
                     </h4>
                     <h3 class="mb-1"><?= $data["saldo"]; ?></h3>
                 </div>
@@ -62,7 +62,7 @@ $data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rf
             <div class="card bg-gradient-primary card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-1">Harga<i class="mdi mdi-highway mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-1">Harga<i class="mdi mdi-currency-btc mdi-24px float-right"></i>
                     </h4>
                     <h3 class="mb-1"><?= $data["harga"]; ?></h3>
                 </div>
@@ -72,7 +72,7 @@ $data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rf
             <div class="card bg-gradient-warning card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-1">Status<i class="mdi mdi-highway mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-1">Status<i class="mdi mdi-information mdi-24px float-right"></i>
                     </h4>
                     <h3 class="mb-1"><?= $data["status_transaksi"]; ?></h3>
                 </div>
