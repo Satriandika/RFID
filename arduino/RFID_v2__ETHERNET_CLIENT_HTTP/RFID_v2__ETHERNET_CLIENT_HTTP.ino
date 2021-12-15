@@ -12,8 +12,8 @@ EthernetClient client;
 
 int HTTP_PORT = 80;
 String HTTP_METHOD = "GET";
-char HOST_NAME[] = "192.168.1.41"; // change to your PC's IP address
-String PATH_NAME = "/rfidui/data-api.php";
+char HOST_NAME[] = "192.168.1.128"; // change to your PC's IP address
+String PATH_NAME = "/RFID/action-data-api.php";
 String getData;
 String uidString;
 Servo myservo;
@@ -66,9 +66,9 @@ int isRising(int input) {
 }
 
 void setLampu(int r, int y, int g) {
-  analogWrite(r, pinR);
-  analogWrite(y, pinY);
-  analogWrite(g, pinG);
+  digitalWrite(pinR, r);
+  digitalWrite(pinY, y);
+  digitalWrite(pinG, g);
 }
 
 bool readRFID() {
@@ -124,7 +124,7 @@ void httpRequest() {
   // AMBIL DATA JSON
   const size_t capacity =
       JSON_OBJECT_SIZE(5) +
-      100; // cari dulu nilainya pakai Arduino Json 5 Asisten
+      110; // cari dulu nilainya pakai Arduino Json 5 Asisten
   DynamicJsonDocument doc(capacity);
   // StaticJsonDocument<192> doc;
   DeserializationError error = deserializeJson(doc, getData);
@@ -177,7 +177,7 @@ void setup() {
   client.connect(HOST_NAME, HTTP_PORT);
   Serial.println("Siap Digunakan!");
 
-  setLampu(255, 0, 0);
+  setLampu(HIGH, 0, 0);
   myservo.write(90);
 }
 
@@ -213,13 +213,13 @@ void loop() {
       Serial.println("Kartu Terdaftar!");
       Serial.println("Silahkan Masuk");
 
-      setLampu(0, 255, 0);
+      setLampu(0, HIGH, 0);
       delay(100);
-      setLampu(0, 0, 255);
+      setLampu(0, 0, HIGH);
     }
   } else if(gateState == 1 && rising == 1) {
     myservo.write(90);
-    setLampu(255,0,0);
+    setLampu(HIGH,0,0);
     Serial.println("Tempelkan kartu");
     gateState = 0;
   }
