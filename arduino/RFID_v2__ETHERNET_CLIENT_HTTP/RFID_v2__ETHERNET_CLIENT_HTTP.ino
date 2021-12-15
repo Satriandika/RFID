@@ -148,11 +148,6 @@ void sendPayment(String rfid, String tol) {
 }
 
 void sendInfo(String status_gerbang, String message) {
-  message.replace(" ", "%20");
-  message.replace("\n", "%0D%0A");
-  message.replace(",", "%2C");
-  message.replace(".", "%2E");
-  message.replace("!", "%21");
   String body = "?status_gerbang=" + status_gerbang + "&message=" + message;
   httpRequest(screen_path, body);
 }
@@ -172,13 +167,13 @@ void setup() {
   mfrc522.PCD_Init(); // Initiate MFRC522
 
   // START IP DHCP
-  // Serial.println("Konfigurasi DHCP, Silahkan Tunggu!");
+  Serial.println("Konfigurasi DHCP, Silahkan Tunggu!");
   if (Ethernet.begin(mac) == 0) {
-    // Serial.println("DHCP Gagal!");
+    Serial.println("DHCP Gagal!");
     if (Ethernet.hardwareStatus() == EthernetNoHardware) {
-      // Serial.println("Ethernet Tidak tereteksi :(");
+      Serial.println("Ethernet Tidak tereteksi :(");
     } else if (Ethernet.linkStatus() == LinkOFF) {
-      // Serial.println("Hubungkan kabel Ethernet!");
+      Serial.println("Hubungkan kabel Ethernet!");
     }
     while (true) {
       delay(1);
@@ -193,7 +188,6 @@ void setup() {
 
   setLampu(HIGH, 0, 0);
   myservo.write(90);
-  sendInfo("Ditutup", "0");
 }
 
 void loop() {
@@ -237,7 +231,7 @@ void loop() {
     myservo.write(90);
     setLampu(HIGH, 0, 0);
     sendInfo("Ditutup", "0");
-    Serial.println("Tempelkan kartu");
+    Serial.println("Tempelkan kartu!");
     gateState = 0;
   }
 

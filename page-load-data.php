@@ -3,6 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once("koneksidb.php");
+require_once("const-error-map.php");
 $data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rfid FROM tb_monitoring a 
 	left join tb_daftarrfid b on a.rfid = b.rfid
 	left join tb_tol c on a.idtol = c.idtol");
@@ -74,7 +75,7 @@ $data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rf
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-1">Status<i class="mdi mdi-information mdi-24px float-right"></i>
                     </h4>
-                    <h3 class="mb-1"><?= $data["status_transaksi"]; ?></h3>
+                    <h3 class="mb-1"><?= $map_status_transaksi[$data["status_transaksi"]]; ?></h3>
                 </div>
             </div>
         </div>
