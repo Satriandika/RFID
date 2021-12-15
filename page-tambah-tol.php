@@ -63,15 +63,15 @@ require "koneksidb.php";
           <div class="page-header">
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                <i class="mdi mdi-currency-usd"></i>
-              </span> Menu Tambah User
+                <i class="mdi mdi-road"></i>
+              </span> Menu Tambah Tol
             </h3>
           </div>
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Tambah User</h4>
+                  <h4 class="card-title">Tambah Tol</h4>
                   <p class="card-description">Masukkan id tol dan harga</p>
                   <form action="action-tambah-tol.php" method="POST" class="forms-sample">
                     <div class="form-group">
