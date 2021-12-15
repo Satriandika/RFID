@@ -30,6 +30,12 @@ $username = $_SESSION["username"];
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link border-bottom" href="page-screen.php">
+                <span class="menu-title">Screen</span>
+                <i class="mdi mdi-monitor-screenshot menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="page-log-data.php">
                 <span class="menu-title">Log Transaksi</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
