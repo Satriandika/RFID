@@ -63,7 +63,7 @@ require "koneksidb.php";
           <div class="page-header">
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                <i class="mdi mdi-currency-usd"></i>
+                <i class="mdi mdi-road"></i>
               </span> Menu Tambah Tol
             </h3>
           </div>
