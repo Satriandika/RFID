@@ -54,29 +54,26 @@ $username = $_SESSION["username"];
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="page-data-tol.php">
+            <a class="nav-link border-bottom" href="page-data-tol.php">
                 <span class="menu-title">Data Tol</span>
                 <i class="mdi mdi-road menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item sidebar-actions">
-            <div class="border-bottom">
-                <h6 class="font-weight-normal mb-3">Setting</h6>
-            </div>
+        <li class="nav-item">
             <a class="nav-link" href="page-tambah-user.php">
                 <span class="menu-title">Tambah User</span>
-                <i class="mdi mdi-account-plus menu-icon item float-sm-right"></i>
+                <i class="mdi mdi-account-plus menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="page-tambah-tol.php">
                 <span class="menu-title">Tambah Tol</span>
-                <i class="mdi mdi-road menu-icon item float-sm-right"></i>
+                <i class="mdi mdi-road menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="btn btn-block btn-lg btn-gradient-primary mt-4" href="action-logout.php">Logout</a>
-            </span>
+        <li class="nav-item sidebar-actions">
+            <a class="btn btn-block btn-lg btn-gradient-primary" href="action-logout.php">Logout</a>
+            <span>
         </li>
     </ul>
 </nav>

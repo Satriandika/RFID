@@ -58,7 +58,7 @@ $data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rf
                 </div>
             </div>
         </div>
-        <div class="col-md-3 stretch-card grid-margin">
+        <div class="col-md-6 stretch-card grid-margin">
             <div class="card bg-gradient-primary card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
@@ -68,8 +68,8 @@ $data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rf
                 </div>
             </div>
         </div>
-        <div class="col-md-3 stretch-card grid-margin">
-            <div class="card bg-gradient-secondary card-img-holder text-white">
+        <div class="col-md-6 stretch-card grid-margin">
+            <div class="card bg-gradient-warning card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-1">Status<i class="mdi mdi-highway mdi-24px float-right"></i>
