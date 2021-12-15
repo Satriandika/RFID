@@ -79,7 +79,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
                     <tbody>
                       <?php
 
-                      $datatampil = mysqli_query($koneksi, "SELECT *, a.rfid as rfid from tb_simpan a left join tb_daftarrfid b on a.rfid = b.rfid ORDER BY no");
+                      $datatampil = mysqli_query($koneksi, "SELECT *, a.rfid as rfid from tb_simpan a left join tb_daftarrfid b on a.rfid = b.rfid ORDER BY no DESC");
                       $no = 1;
                       if (is_array($datatampil) || is_object($datatampil)) {
                         foreach ($datatampil as $row) {
