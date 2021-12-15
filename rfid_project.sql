@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 13, 2021 at 10:37 AM
+-- Host: 127.0.0.1
+-- Generation Time: Dec 15, 2021 at 09:15 AM
 -- Server version: 10.4.22-MariaDB
--- PHP Version: 7.3.33
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rfidui`
+-- Database: `rfid_project`
 --
 
 -- --------------------------------------------------------
@@ -64,6 +64,25 @@ CREATE TABLE `tb_monitoring` (
 
 INSERT INTO `tb_monitoring` (`tanggal`, `rfid`, `idtol`, `status_transaksi`) VALUES
 ('2021-12-10 10:36:37', 'AA6C531A', 'srengseng', '03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_screen`
+--
+
+CREATE TABLE `tb_screen` (
+  `no` int(11) NOT NULL,
+  `status_gerbang` varchar(1000) NOT NULL,
+  `message` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_screen`
+--
+
+INSERT INTO `tb_screen` (`no`, `status_gerbang`, `message`) VALUES
+(1, 'Dibuka', 'sukmasuk');
 
 -- --------------------------------------------------------
 
@@ -347,7 +366,10 @@ CREATE TABLE `tb_tol` (
 INSERT INTO `tb_tol` (`idtol`, `harga`, `namatol`) VALUES
 ('kebun jeruk', 10000, 'kebun jeruk'),
 ('bca', 10000, 'bca'),
-('srengseng', 75000, 'srengseng');
+('srengseng', 75000, 'srengseng'),
+('meruya', 123123, NULL),
+('meruya', 1123123, NULL),
+('meruya', 123123, NULL);
 
 -- --------------------------------------------------------
 
@@ -367,7 +389,8 @@ CREATE TABLE `tb_user` (
 
 INSERT INTO `tb_user` (`id`, `username`, `password`) VALUES
 (1, 'admin', 'admin'),
-(2, 'user1', 'user1');
+(2, 'user1', 'user1'),
+(3, 'adsf', 'adsf');
 
 --
 -- Indexes for dumped tables
@@ -378,6 +401,12 @@ INSERT INTO `tb_user` (`id`, `username`, `password`) VALUES
 --
 ALTER TABLE `tb_daftarrfid`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_screen`
+--
+ALTER TABLE `tb_screen`
+  ADD PRIMARY KEY (`no`);
 
 --
 -- Indexes for table `tb_simpan`
@@ -402,6 +431,12 @@ ALTER TABLE `tb_daftarrfid`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tb_screen`
+--
+ALTER TABLE `tb_screen`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tb_simpan`
 --
 ALTER TABLE `tb_simpan`
@@ -411,7 +446,7 @@ ALTER TABLE `tb_simpan`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
