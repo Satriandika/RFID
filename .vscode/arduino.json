@@ -1,0 +1,4 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "arduino\\RFID_v2__ETHERNET_CLIENT_HTTP.ino"
+}
