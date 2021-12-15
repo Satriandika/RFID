@@ -141,13 +141,6 @@ $data = query("SELECT * FROM tb_monitoring")[0];
       <script src="assets/vendors/datatables/js/buttons.bootstrap4.min.js"></script>
       <script src="assets/vendors/datatables/js/data-table.js"></script>
 
-
-
-      <!-- <script>
-        $(document).ready(function() {
-          $('.table').DataTable();
-        });
-      </script> -->
       <!-- End custom js for this page -->
       
       <!-- JS For Realtime -->

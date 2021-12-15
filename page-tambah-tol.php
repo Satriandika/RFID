@@ -83,7 +83,7 @@ require "koneksidb.php";
                       <input type="number" class="form-control" name="harga" placeholder="Masukan harga">
                     </div>
                     <button type="submit" name="submit" value="Submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                    <button onclick="cancelSubmit()" class="btn btn-light">Cancel</button>
+                    <a onclick="cancelSubmit()" class="btn btn-light">Cancel</a>
                   </form>
                 </div>
               </div>
