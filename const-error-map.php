@@ -1,8 +1,8 @@
 <?php
-    define("BERHASIL", "Berhasil");
-    define("GAGAL", "Gagal");
-    define("RFID_NOT_FOUND", "RFID tidak dikenal");
-    define("TOL_NOT_FOUND", "Tol tidak dikenal");
-    define("SALDO_KURANG", "Saldo kurang");
-    define("TOPUP", "Topup");
+    define("BERHASIL", "1");
+    define("GAGAL", "2");
+    define("RFID_NOT_FOUND", "3");
+    define("TOL_NOT_FOUND", "4");
+    define("SALDO_KURANG", "5");
+    define("TOPUP", "6");
 ?>
