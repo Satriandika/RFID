@@ -11,10 +11,12 @@ date_default_timezone_set('Asia/Jakarta');
 $tgl = date("Y-m-d G:i:s");
 
 if($status_gerbang && $message) {
-    $res = $koneksi->query("UPDATE tb_monitoring SET status_gerbang = '$status_gerbang', message = '$message'");
+    $sql = "UPDATE tb_screen SET status_gerbang='$status_gerbang', message='$message'";
+    var_dump($sql);
+    $res = $koneksi->query($sql);
 }
 
 
 //MENJADIKAN JSON DATA
-$result = [];
+$result = json_encode(null);
 echo $result;
