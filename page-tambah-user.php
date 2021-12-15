@@ -15,7 +15,7 @@ $data    = query("SELECT * FROM tb_monitoring")[0];
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Top Up</title>
+  <title>Tambah User</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
@@ -85,7 +85,7 @@ $data    = query("SELECT * FROM tb_monitoring")[0];
                       <input type="password" class="form-control" name="password" placeholder="Masukkan password">
                     </div>
                     <button type="submit" name="submit" value="Submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                    <a onclick="cancelSubmit()" class="btn btn-light">Cancel</button>
+                    <a onclick="cancelSubmit()" class="btn btn-light">Cancel</a>
                   </form>
                 </div>
               </div>
