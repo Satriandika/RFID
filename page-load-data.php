@@ -116,7 +116,7 @@ $data = queryfirst("SELECT a.status_transaksi, a.tanggal, b.*, c.*, a.rfid as rf
                                                                     <td>" . $row['harga'] . "</td>
                                                                     <td>" . $row['saldoakhir'] . "</td>
                                                                     <td>" . $row['tol'] . "</td>
-                                                                    <td>" . $row['status_transaksi'] . "</td>
+                                                                    <td>" . $map_status_transaksi[$row['status_transaksi']] . "</td>
                                                                 </tr>";
                                         $no++;
                                     }

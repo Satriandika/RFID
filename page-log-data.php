@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 require_once("koneksidb.php");
-
+require_once("const-error-map.php");
 $data = query("SELECT * FROM tb_monitoring")[0];
 ?>
 <!DOCTYPE html>
@@ -34,6 +34,20 @@ $data = query("SELECT * FROM tb_monitoring")[0];
 </head>
 
 <body>
+
+  <?php 
+          session_start();
+          if($_SESSION['status']!="login"){
+              header("location:index.php?pesan=belum_login");
+          }
+
+          if(isset($_GET['pesan'])){
+              if($_GET['pesan'] == "berhasil"){
+                  echo "<script type='text/javascript'>alert('Log berhasil dihapus!');</script>";
+              }
+          }
+    ?>
+
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
       <?php
@@ -92,7 +106,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
                                   <td>" . $row['harga'] . "</td>
                                   <td>" . $row['saldoakhir'] . "</td>
                                   <td>" . $row['tol'] . "</td>
-                                  <td>" . $row['status_transaksi'] . "</td>
+                                  <td>" . $map_status_transaksi[$row['status_transaksi']] . "</td>
                               </tr>";
                           $no++;
                         }
@@ -102,6 +116,7 @@ $data = query("SELECT * FROM tb_monitoring")[0];
                       ?>
 
                   </table>
+                    <a href="action-hapus-log-data.php" class="btn btn-danger btn-block mt-5" onclick="return confirm('Yakin akan menghapus log?')">Clear Log Data</a>
                 </div>
               </div>
 
