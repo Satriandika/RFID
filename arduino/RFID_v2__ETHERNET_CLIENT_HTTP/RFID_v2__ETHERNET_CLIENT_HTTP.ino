@@ -3,6 +3,7 @@
 #include <MFRC522.h>
 #include <SPI.h>
 #include <Servo.h>
+#include <NewPing.h>
 
 // replace the MAC address below by the MAC address printed on a sticker on the
 // Arduino Shield 2
@@ -23,22 +24,29 @@ Servo myservo;
 #define SS_PIN 9
 #define RST_PIN 8
 #define pinBuzzer 7
-int pinIR = 6;
-int pinServo = 3;
+// int pinIR = 6;
+int pinServo = A2;
 int pinR = 2;
 int pinY = 4;
 int pinG = 5;
 int r_prev = 0;
 String tol = "srengseng";
 int gateState = 0;
+int pinTrigger = A4;
+int pinEcho = A3;
+int BATAS = 20 * 100;
 
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 
-const char *tanggal_dibaca;
-const char *harga;
-const char *saldo;
+// Ultrasonik
+NewPing cm(pinTrigger, pinEcho, BATAS);
+
+// body response json
+// const char *tanggal_dibaca;
+// const char *harga;
+// const char *saldo;
 const char *status_transaksi;
-const char *nama_dibaca;
+// const char *nama_dibaca;
 
 void buzzeroke() {
   digitalWrite(pinBuzzer, HIGH);
@@ -51,6 +59,12 @@ void buzzeroke() {
   delay(100);
 }
 
+void buzzOne() {
+  digitalWrite(pinBuzzer, HIGH);
+  delay(100);
+  digitalWrite(pinBuzzer, LOW);
+}
+
 void buzzergagal() {
   digitalWrite(pinBuzzer, HIGH);
   delay(850);
@@ -58,9 +72,17 @@ void buzzergagal() {
   delay(80);
 }
 
-int isRising(int input) {
+int ultraTreshold(int input, int max) {
+  if (input >= max || input == 0) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+int isFalling(int input) {
   int res = 0;
-  if (input == 1 and r_prev == 0) {
+  if (input == 0 and r_prev == 1) {
     res = 1;
   }
   r_prev = input;
@@ -92,10 +114,7 @@ bool readRFID() {
   }
   uidString.toUpperCase();
   Serial.println(uidString);
-  digitalWrite(pinBuzzer, HIGH);
-  delay(100);
-  digitalWrite(pinBuzzer, LOW);
-
+  buzzOne();
   return true;
 }
 
@@ -133,18 +152,18 @@ void sendPayment(String rfid, String tol) {
   // StaticJsonDocument<192> doc;
   DeserializationError error = deserializeJson(doc, getData);
 
-  tanggal_dibaca = doc["tanggal"];
-  harga = doc["harga"];
-  saldo = doc["saldo"];
+  // tanggal_dibaca = doc["tanggal"];
+  // harga = doc["harga"];
+  // saldo = doc["saldo"];
   status_transaksi = doc["status_transaksi"];
-  nama_dibaca = doc["nama"];
+  // nama_dibaca = doc["nama"];
 
   // PRINT TO SERIAL
-  Serial.println("Waktu = " + String(tanggal_dibaca));
-  Serial.println("Harga = " + String(harga));
-  Serial.println("Saldo = " + String(saldo));
+  // Serial.println("Waktu = " + String(tanggal_dibaca));
+  // Serial.println("Harga = " + String(harga));
+  // Serial.println("Saldo = " + String(saldo));
   Serial.println("Status Transaksi = " + String(status_transaksi));
-  Serial.println("Nama = " + String(nama_dibaca));
+  // Serial.println("Nama = " + String(nama_dibaca));
 }
 
 void sendInfo(String status_gerbang, String message) {
@@ -153,7 +172,7 @@ void sendInfo(String status_gerbang, String message) {
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(pinBuzzer, OUTPUT);
   pinMode(pinR, OUTPUT);
   pinMode(pinY, OUTPUT);
@@ -192,10 +211,12 @@ void setup() {
 
 void loop() {
   // Baca data
-  int bacaIR = !digitalRead(pinIR);
-  int rising = isRising(bacaIR);
-  if (rising) {
-    Serial.println("rising");
+  // int bacaIR = !digitalRead(pinIR);
+  int bacaUltras = cm.ping_cm();
+  Serial.println("us=" + String(bacaUltras));
+  int falling = isFalling(ultraTreshold(bacaUltras, 30));
+  if (falling) {
+    Serial.println("falling");
   }
 
   if (gateState == 0 && readRFID()) {
@@ -215,24 +236,25 @@ void loop() {
         Serial.println("TRANSAKSI GAGAL");
       }
     } else {
-      buzzeroke();
       gateState = 1;
-      myservo.write(0);
-
       sendInfo("Dibuka", "1");
+
+      setLampu(0, HIGH, 0);
+      delay(300);
+      setLampu(0, 0, HIGH);
+      buzzeroke();
+      myservo.write(0);
       Serial.println("Kartu Terdaftar!");
       Serial.println("Silakan Masuk");
 
-      setLampu(0, HIGH, 0);
-      delay(100);
-      setLampu(0, 0, HIGH);
     }
-  } else if (gateState == 1 && rising == 1) {
-    myservo.write(90);
-    setLampu(HIGH, 0, 0);
+  } else if (gateState == 1 && falling == 1) {
     sendInfo("Ditutup", "0");
-    Serial.println("Tempelkan kartu!");
+    buzzOne();
     gateState = 0;
+    setLampu(HIGH, 0, 0);
+    myservo.write(90);
+    Serial.println("Tempelkan kartu!");
   }
 
   client.clearWriteError();
