@@ -41,7 +41,7 @@ $color = $data["status_gerbang"] == "Ditutup" ? "bg-gradient-danger" : "bg-gradi
             </div>
         </div>
         <div class="col-md-4 stretch-card grid-margin">
-            <div class="card bg-gradient-warning card-img-holder text-white">
+            <div class="card bg-gradient-dark card-img-holder text-white">
                 <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-1">Saldo<i class="mdi mdi-currency-usd mdi-24px float-right"></i>
