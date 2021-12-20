@@ -60,11 +60,11 @@ if ($status_transaksi == BERHASIL) {
 }
 
 //MENJADIKAN JSON DATA
-$res["rfid"] = $data['rfid'];
-$res["tanggal"] = $tgl;
-$res["harga"] = $harga;
-$res["saldo"] = $saldoakhir;
+// $res["rfid"] = $data['rfid'];
+// $res["tanggal"] = $tgl;
+// $res["harga"] = $harga;
+// $res["saldo"] = $saldoakhir;
 $res["status_transaksi"] = $status_transaksi;
-$res["nama"] = $data["nama"] ?? null;
+// $res["nama"] = $data["nama"] ?? null;
 $result = json_encode($res);
 echo $result;

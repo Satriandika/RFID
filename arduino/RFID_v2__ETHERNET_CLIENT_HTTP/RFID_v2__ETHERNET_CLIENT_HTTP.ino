@@ -25,16 +25,16 @@ Servo myservo;
 #define RST_PIN 8
 #define pinBuzzer 7
 // int pinIR = 6;
-int pinServo = A2;
-int pinR = 2;
-int pinY = 4;
-int pinG = 5;
+int pinServo = A2; // orange
+int pinR = 2; // coklat
+int pinY = 4; // hitam
+int pinG = 5; // putih
+int pinTrigger = A4; // biru
+int pinEcho = A3; // ungu
 int r_prev = 0;
 String tol = "srengseng";
 int gateState = 0;
-int pinTrigger = A4;
-int pinEcho = A3;
-int BATAS = 20 * 100;
+int BATAS = 20;
 
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 
@@ -213,8 +213,8 @@ void loop() {
   // Baca data
   // int bacaIR = !digitalRead(pinIR);
   int bacaUltras = cm.ping_cm();
-  Serial.println("us=" + String(bacaUltras));
-  int falling = isFalling(ultraTreshold(bacaUltras, 30));
+  // Serial.println("us=" + String(bacaUltras));
+  int falling = isFalling(ultraTreshold(bacaUltras, 15));
   if (falling) {
     Serial.println("falling");
   }
@@ -231,6 +231,7 @@ void loop() {
         Serial.println("TOL TIDAK TERDAFTAR");
 
       } else if (String(status_transaksi) == "5") {
+        sendInfo("Ditutup", "2");
         Serial.println("SALDO TIDAK CUKUP");
       } else {
         Serial.println("TRANSAKSI GAGAL");

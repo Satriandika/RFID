@@ -3,6 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once("koneksidb.php");
+require_once("const-error-map.php");
 $data = queryfirst("SELECT * from tb_screen");
 $color = $data["status_gerbang"] == "Ditutup" ? "bg-gradient-danger" : "bg-gradient-success"
 ?>
@@ -34,7 +35,7 @@ $color = $data["status_gerbang"] == "Ditutup" ? "bg-gradient-danger" : "bg-gradi
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-1">Message<i class="mdi mdi-message-reply-text mdi-24px float-right"></i>
                     </h4>
-                    <h3 class="mb-1"><?= $data["message"] == 1 ? "Transaksi berhasil! \nSelamat jalan." : "Tempelkan kartu!" ?></h3>
+                    <h3 class="mb-1"><?= $map_status_screen[$data["message"]] ?></h3>
                 </div>
             </div>
         </div>

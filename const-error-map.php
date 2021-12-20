@@ -14,4 +14,10 @@
     $map_status_transaksi["5"] = "Saldo kurang";
     $map_status_transaksi["6"] = "Topup";
 
+    $map_status_screen = [];
+    $map_status_screen["0"] = "Tempelkan Kartu";
+    $map_status_screen["1"] = "Transaksi berhasil! \nSelamat jalan.";
+    $map_status_screen["2"] = "Saldo tidak cukup";
+
+
 ?>
