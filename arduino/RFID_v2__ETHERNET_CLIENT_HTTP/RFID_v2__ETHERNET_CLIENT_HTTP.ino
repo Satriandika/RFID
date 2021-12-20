@@ -32,7 +32,11 @@ int pinG = 5; // putih
 int pinTrigger = A4; // biru
 int pinEcho = A3; // ungu
 int r_prev = 0;
+const size_t inp_buff_size = 20;
+int inp_buff[inp_buff_size] = {0};
+int falling_pattern[inp_buff_size] = {0};
 String tol = "srengseng";
+
 int gateState = 0;
 int BATAS = 20;
 
@@ -80,12 +84,41 @@ int ultraTreshold(int input, int max) {
   }
 }
 
+void printArray(size_t size, int arr[]) {
+  for (size_t i = 0; i < size; i++)
+  {
+    Serial.print(String(arr[i]) + ",");
+  }
+  Serial.println();
+}
+
+void pushBuffer(size_t size, int inp_buff[], int input) {
+  // shift 1
+  for (size_t i = size - 1; i > 0; i--)
+  {
+    inp_buff[i] = inp_buff[i-1];
+  }
+  // push
+  inp_buff[0] = input;
+}
+
+bool checkPattern(size_t size, int inp_buff[], int pattern[]){
+  for (size_t i = 0; i < size; i++)
+  {
+    if(inp_buff[i] != pattern[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 int isFalling(int input) {
   int res = 0;
-  if (input == 0 and r_prev == 1) {
+  // printArray(inp_buff_size, inp_buff);
+  pushBuffer(inp_buff_size, inp_buff, input);
+  if (checkPattern(inp_buff_size, inp_buff, falling_pattern)) {
     res = 1;
   }
-  r_prev = input;
   return res;
 }
 
@@ -207,14 +240,18 @@ void setup() {
 
   setLampu(HIGH, 0, 0);
   myservo.write(90);
+  falling_pattern[inp_buff_size - 1] = 1;
+  falling_pattern[inp_buff_size - 2] = 1;
+  falling_pattern[inp_buff_size - 3] = 1;
 }
 
 void loop() {
   // Baca data
   // int bacaIR = !digitalRead(pinIR);
   int bacaUltras = cm.ping_cm();
-  // Serial.println("us=" + String(bacaUltras));
+  Serial.println("us=" + String(ultraTreshold(bacaUltras, 15)));
   int falling = isFalling(ultraTreshold(bacaUltras, 15));
+  // printArray(inp_buff_size, inp_buff);
   if (falling) {
     Serial.println("falling");
   }
