@@ -24,7 +24,7 @@ if ($data > 0) {
         if (!$koneksi->query($sqlsave)) throw new Exception("fail save log");
 
 
-        header("Location: page-topup.php?pesan=berhasil");
+        header("Location: page-topup.php?pesan=berhasil&saldo=$saldoakhir");
     }
 } else {
     header("Location: page-topup.php?pesan=gagal");

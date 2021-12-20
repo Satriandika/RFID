@@ -41,9 +41,11 @@ if (isset($_GET['getRFID'])) {
     header("location:index.php?pesan=belum_login");
   }
 
+  $saldo = $_GET["saldo"] ?? "";
+
   if (isset($_GET['pesan'])) {
     if ($_GET['pesan'] == "berhasil") {
-      echo "<script type='text/javascript'>alert('Berhasil menambahkan data!');</script>";
+      echo "<script type='text/javascript'>alert('Berhasil topup! Saldo sekarang: $saldo');</script>";
     }
     if ($_GET['pesan'] == "gagal") {
       echo "<script type='text/javascript'>alert('Data Tidak Terdaftar!');</script>";
