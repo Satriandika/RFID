@@ -36,7 +36,6 @@ $data = query("SELECT * FROM tb_monitoring")[0];
 <body>
 
   <?php 
-          session_start();
           if($_SESSION['status']!="login"){
               header("location:index.php?pesan=belum_login");
           }
