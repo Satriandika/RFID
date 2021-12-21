@@ -14,7 +14,9 @@ EthernetClient client;
 int HTTP_PORT = 80;
 char HTTP_METHOD[] = "GET";
 char HOST_NAME[] = "192.168.1.128"; // change to your PC's IP address
+// path untuk payment
 char data_path[] = "/RFID/action-data-api.php";
+// path untuk informasi gerbang
 char screen_path[] = "/RFID/action-screen-api.php";
 char endH[] = "\r\n\r\n";
 String getData;
@@ -41,6 +43,7 @@ MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 // Ultrasonik
 NewPing cm(pinTrigger, pinEcho, BATAS);
 
+// // Data JSON dimasukkan ke variabel global
 // body response json
 // const char *tanggal_dibaca;
 // const char *harga;
@@ -80,6 +83,7 @@ int ultraTreshold(int input, int max) {
   }
 }
 
+// mengecek data falling menggunakan r_prev (data sebelumnya)
 int isFalling(int input) {
   int res = 0;
   if (input == 0 and r_prev == 1) {
@@ -89,12 +93,14 @@ int isFalling(int input) {
   return res;
 }
 
+// utility untuk menyalakan traffic light
 void setLampu(int r, int y, int g) {
   digitalWrite(pinR, r);
   digitalWrite(pinY, y);
   digitalWrite(pinG, g);
 }
 
+// membaca rfid
 bool readRFID() {
   // Program yang akan dijalankan berulang-ulang
   if (!mfrc522.PICC_IsNewCardPresent()) {
@@ -118,6 +124,7 @@ bool readRFID() {
   return true;
 }
 
+// fungsi untuk mengirip http request ke server
 void httpRequest(String path, String body) {
   // POST TO WEB
   client.connect(HOST_NAME, HTTP_PORT);
@@ -133,13 +140,14 @@ void httpRequest(String path, String body) {
       char endH[] = "\r\n\r\n";
       client.find(endH);
       getData = client.readString();
-      getData.trim();
+      getData.trim(); // response akan dimasukkan ke dalam variabel global
     }
   }
 
   Serial.println("size=" + String(getData.length()) + "response=" + getData);
 }
 
+// send request untuk proses pembayaran
 void sendPayment(String rfid, String tol) {
   String body = "?rfid=" + rfid + "&tol=" + tol;
   httpRequest(data_path, body);
@@ -149,7 +157,6 @@ void sendPayment(String rfid, String tol) {
       JSON_OBJECT_SIZE(5) +
       110; // cari dulu nilainya pakai Arduino Json 5 Asisten
   DynamicJsonDocument doc(capacity);
-  // StaticJsonDocument<192> doc;
   DeserializationError error = deserializeJson(doc, getData);
 
   // tanggal_dibaca = doc["tanggal"];
@@ -166,11 +173,14 @@ void sendPayment(String rfid, String tol) {
   // Serial.println("Nama = " + String(nama_dibaca));
 }
 
+// fungsi untuk mengirim info status gerbang
 void sendInfo(String status_gerbang, String message) {
   String body = "?status_gerbang=" + status_gerbang + "&message=" + message;
   httpRequest(screen_path, body);
 }
 
+
+// arduino setup function
 void setup() {
   Serial.begin(9600);
   pinMode(pinBuzzer, OUTPUT);
@@ -205,6 +215,7 @@ void setup() {
   client.connect(HOST_NAME, HTTP_PORT);
   Serial.println("Siap Digunakan!");
 
+  // inisiasi lampu merah dinyalakan
   setLampu(HIGH, 0, 0);
   myservo.write(90);
 }
